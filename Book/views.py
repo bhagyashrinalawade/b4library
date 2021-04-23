@@ -96,3 +96,20 @@ def restore_book(request,id):
 def show_deleted_data(request):
     all_deleted_books=Book.Inactive_objects.all()
     return render(request,template_name='home.html', context={"books": all_deleted_books})
+
+
+
+
+def my_custom_sql():
+    from django.db import connection, transaction
+    cursor = connection.cursor()
+
+    # Data modifying operation - commit required
+    cursor.execute("UPDATE bar SET foo = 1 WHERE baz = %s", [self.baz])
+    transaction.commit_unless_managed()
+
+    # Data retrieval operation - no commit required
+    cursor.execute("SELECT foo FROM bar WHERE baz = %s", [self.baz])
+    row = cursor.fetchone()
+
+    return row
