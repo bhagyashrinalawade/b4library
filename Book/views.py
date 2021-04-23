@@ -113,3 +113,8 @@ def my_custom_sql():
     row = cursor.fetchone()
 
     return row
+
+
+class Bookviewlist():
+    queryset=book.objects.filter(is_deleted=False)
+    serializer_class=Bookseralization
